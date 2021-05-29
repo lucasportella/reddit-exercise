@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import firstReducer from './firstReducer';
+import loginVerifierReducer from './loginVerifierReducer';
 
 const rootReducer = combineReducers({
-  firstReducer,
+  loginVerifierReducer,
 });
 
 export default rootReducer;
