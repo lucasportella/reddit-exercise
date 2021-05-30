@@ -21,12 +21,11 @@ class Login extends React.Component {
   }
 
   render() {
-    const { checked } = this.state;
-    if (checked) {
+    const { checkRegister, loginChecked } = this.props;
+    const { email, password } = this.state
+    if (loginChecked) {
       return <Redirect to="/Clientes" />;
     }
-    const { checkRegister } = this.props;
-    const { email, password } = this.state
     return (
       <>
         <form>
@@ -58,12 +57,12 @@ class Login extends React.Component {
   }
 }
 
-// const mapStateToProps = (state) => ({
-//   loginState: state.loginVerifierReducer.user,
-// })
+const mapStateToProps = (state) => ({
+  loginChecked: state.loginVerifierReducer.checked,
+})
 
 const mapDispatchToProps = (dispatch) => ({
   checkRegister: state => dispatch(loginAction(state))
 })
 
-export default connect(null, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

@@ -12,15 +12,13 @@ const INITIAL_STATE = {
 function loginVerifierReducer(state = INITIAL_STATE, action) {
   switch (action.type) {
     case LOGIN_VALIDATION:
-      // const isRegistered = state.registeredUsers.some((user) => user === action.payload);
-      // if (isRegistered) { return { 
-      //   checked: true,
-      //   ...state.registeredUsers,
-      //   registeredUsers: [...state.registeredUsers, action.state]} }
-      return { 
+      const isRegistered = state.registeredUsers.some((user) => user === action.state);
+      console.log(isRegistered);
+      if (isRegistered) { return { 
         user: action.state,
         checked: true,
-        registeredUsers: [...state.registeredUsers, action.state]};
+        registeredUsers: [...state.registeredUsers, action.state]}; }
+      return state;
     default:
       return state;
   }
