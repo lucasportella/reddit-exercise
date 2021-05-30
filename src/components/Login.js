@@ -7,7 +7,6 @@ class Login extends React.Component {
   constructor() {
     super();
     this.state = {
-      checked: false,
       email: "",
       password: "",
     };
@@ -26,7 +25,8 @@ class Login extends React.Component {
     if (checked) {
       return <Redirect to="/Clientes" />;
     }
-    const { email, password, checkRegister } = this.props
+    const { checkRegister } = this.props;
+    const { email, password } = this.state
     return (
       <>
         <form>
@@ -44,7 +44,7 @@ class Login extends React.Component {
             <label>
               Senha:
               <input
-                onChange={this.handleChange}
+                onChange={ this.handleChange }
                 type="password"
                 name="password"
                 value={ this.state.password }
@@ -58,12 +58,12 @@ class Login extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  loginState: state.loginVerifierReducer.user,
-})
+// const mapStateToProps = (state) => ({
+//   loginState: state.loginVerifierReducer.user,
+// })
 
 const mapDispatchToProps = (dispatch) => ({
-  checkRegister: e => dispatch(loginAction(e))
+  checkRegister: state => dispatch(loginAction(state))
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(null, mapDispatchToProps)(Login);
