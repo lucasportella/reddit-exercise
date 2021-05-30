@@ -1,5 +1,7 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
+import { connect } from 'react-redux';
+import { loginAction } from '../actions/index';
 
 class Login extends React.Component {
   constructor() {
@@ -13,7 +15,6 @@ class Login extends React.Component {
   }
 
   handleChange({ target: { name, value } }) {
-    console.log(this.state)
     this.setState((oldState) => ({
       ...oldState,
       [name]: value,
@@ -25,6 +26,7 @@ class Login extends React.Component {
     if (checked) {
       return <Redirect to="/Clientes" />;
     }
+    const { email, password, checkRegister } = this.props
     return (
       <>
         <form>
@@ -36,7 +38,7 @@ class Login extends React.Component {
                 onChange={this.handleChange}
                 type="text"
                 name="email"
-                value={this.state.email}
+                value={ this.state.email }
               />
             </label>
             <label>
@@ -45,10 +47,10 @@ class Login extends React.Component {
                 onChange={this.handleChange}
                 type="password"
                 name="password"
-                value={this.state.password}
+                value={ this.state.password }
               />
             </label>
-            <button type="button">Efetuar Login</button>
+            <button onClick={ () => checkRegister({email, password})} type="button">Efetuar Login</button>
           </fieldset>
         </form>
       </>
@@ -56,4 +58,12 @@ class Login extends React.Component {
   }
 }
 
-export default Login;
+const mapStateToProps = (state) => ({
+  loginState: state.loginVerifierReducer.user,
+})
+
+const mapDispatchToProps = (dispatch) => ({
+  checkRegister: e => dispatch(loginAction(e))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
