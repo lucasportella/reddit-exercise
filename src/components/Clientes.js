@@ -7,10 +7,16 @@ class Clientes extends React.Component {
     const { isChecked } = this.props;
   if (isChecked) {
     return (
-      <><h1>Clientes cadastrados</h1></>
+      <>
+      <h1>Clientes cadastrados</h1></>
     )
   } else {
-    return <Redirect to="/Cadastro"/>
+    return (
+      <>
+      {alert('Login Não efetuado')}
+      <Redirect to="/Cadastro"/>
+      </>
+    )
   }
 
 
